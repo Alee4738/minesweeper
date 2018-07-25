@@ -57,13 +57,29 @@ def main():
                 row = int(row)
                 col = int(col)
                 if 1 <= row <= dim_x and 1 <= col <= dim_y:
+                    board_row = row - 1
+                    board_col = col - 1
                     # TODO: make them actually affect the board
+                    # option: click
                     if op == 'c':
                         print('click ' + str(row) + ' ' + str(col))
+
+                    # option: flag
                     elif op == 'f':
                         print('flag ' + str(row) + ' ' + str(col))
+                        if user_board[board_row][board_col] in ['X', '?']:
+                            user_board[board_row][board_col] = 'f'
+                        elif user_board[board_row][board_col] == 'f':
+                            user_board[board_row][board_col] = 'X'
+
+                    # option: question
                     elif op == '?':
+                        # debug:
                         print('question ' + str(row) + ' ' + str(col))
+                        if user_board[board_row][board_col] in ['X', 'f']:
+                            user_board[board_row][board_col] = '?'
+                        elif user_board[board_row][board_col] == '?':
+                            user_board[board_row][board_col] = 'X'
                 else:
                     print('Invalid row or column')
                     continue
