@@ -15,6 +15,7 @@ user_board = []
 # . is free, * is mine, f is flag, ? is question, X is not revealed yet
 re_options = re.compile('^[f?c] [0-9]+ [0-9]+$')
 
+
 def main():
     # make boards
     board = [['.' for i in range(dim_x)] for j in range(dim_y)]
@@ -73,12 +74,6 @@ def main():
 
             else:
                 print('Invalid input. Must have valid option and row and column separated by spaces')
-
-
-    # debug: print board nicely print_board(board)
-
-
-
 
 
 def print_user_options():
