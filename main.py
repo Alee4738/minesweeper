@@ -58,8 +58,8 @@ def main():
     while True:
         # win condition
         if not unrevealed_safe_cells:
-            print('*** Congratulations! You Win! ***')
             print_board(board)
+            print('*** Congratulations! You Win! ***')
             break
 
         # regular move
@@ -67,10 +67,7 @@ def main():
             print_board(user_board)
             print()
 
-            # print options
-            print_user_options()
-
-            user_choice = input('Next move: ')
+            user_choice = input('Next move (type "help" for options): ')
 
             if re_options.match(user_choice):
                 op, input_row, input_col = user_choice.split(' ')
@@ -81,7 +78,7 @@ def main():
                     col = input_col - 1
                     # option: click
                     if op == 'c':
-                        print('click ' + str(input_row) + ' ' + str(input_col))
+                        # debug: print('click ' + str(input_row) + ' ' + str(input_col))
                         if (row, col) in mine_cells:
                             print('*** BOOM ***')
                             print('You clicked a mine! Game Over.')
@@ -108,6 +105,9 @@ def main():
                     print('Invalid row or column')
                     continue
 
+            elif user_choice == 'help':
+                print_user_options()
+
             elif user_choice == 'quit':
                 print('Have a nice day!')
                 exit(1)
@@ -121,6 +121,7 @@ def print_user_options():
         'f r c: mark a flag on the box in row r, column c',
         'c r c: click the box in row r, column c',
         '? r c: mark a question mark on the box in row r, column c',
+        'help: show this help menu',
         'quit: quit the game',
     ]
     for op in ops:
@@ -165,7 +166,7 @@ def click(cell):
 
     row = cell[0]
     col = cell[1]
-    print(cell)
+    # debug: print(cell)
 
     # prevent list.remove error and infinite recursion
     was_not_yet_revealed = (user_board[row][col] in ['X', 'f', '?'])
